@@ -1,0 +1,1 @@
+rootProject.name = "com.ktor-backend-vegangoods"
