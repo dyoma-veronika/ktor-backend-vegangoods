@@ -2,8 +2,8 @@ package com.vegangoods.plugins
 
 import com.vegangoods.data.*
 import com.vegangoods.routes.*
-import io.ktor.application.*
-import io.ktor.routing.*
+import io.ktor.server.application.*
+import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
 
 fun Application.configureRouting() {

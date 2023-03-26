@@ -6,8 +6,7 @@ val koin_version: String by project
 
 plugins {
     application
-    kotlin("jvm") version "1.5.31"
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.6.0"
+    kotlin("jvm") version "1.8.0"
 }
 
 group = "com.plcoding"
@@ -22,6 +21,7 @@ repositories {
 
 dependencies {
     implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktor_version")
+    implementation("io.ktor:ktor-server-cors:$ktor_version")
     implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
     implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-call-logging-jvm:$ktor_version")
@@ -36,7 +36,7 @@ dependencies {
     implementation("org.litote.kmongo:kmongo-coroutine:$kmongo_version")
 
     // Koin core features
+    implementation("io.insert-koin:koin-ktor:3.4.0")
     implementation("io.insert-koin:koin-core:$koin_version")
-    implementation("io.insert-koin:koin-ktor:$koin_version")
-    implementation("io.insert-koin:koin-logger-slf4j:$koin_version")
+    implementation("io.insert-koin:koin-logger-slf4j:3.4.0")
 }

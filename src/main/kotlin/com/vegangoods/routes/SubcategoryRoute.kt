@@ -1,10 +1,10 @@
 package com.vegangoods.routes
 
 import com.vegangoods.data.SubcategoryDataSource
-import io.ktor.application.*
 import io.ktor.http.*
-import io.ktor.response.*
-import io.ktor.routing.*
+import io.ktor.server.application.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
 
 fun Route.getSubcategoriesByCategory(subcategoryDataSource: SubcategoryDataSource) {
     get("/subcategories/{category}") {
