@@ -9,21 +9,21 @@ val mainModule = module {
     single {
         KMongo.createClient()
             .coroutine
-            .getDatabase("vegangoods_db")
+            .getDatabase("VeganGoods")
     }
-    factory<CountryDataSource> {
+    single<CountryDataSource> {
         CountryDataSourceImpl(get())
     }
-    factory<ShopDataSource> {
+    single<ShopDataSource> {
         ShopDataSourceImpl(get())
     }
-    factory<CategoryDataSource> {
+    single<CategoryDataSource> {
         CategoryDataSourceImpl(get())
     }
-    factory<SubcategoryDataSource> {
+    single<SubcategoryDataSource> {
         SubcategoryDataSourceImpl(get())
     }
-    factory<ItemDataSource> {
+    single<ItemDataSource> {
         ItemDataSourceImpl(get())
     }
 }

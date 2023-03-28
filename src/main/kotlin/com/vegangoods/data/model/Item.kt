@@ -2,11 +2,12 @@ package com.vegangoods.data.model
 
 import kotlinx.serialization.Serializable
 import org.bson.codecs.pojo.annotations.BsonId
+import org.bson.types.ObjectId
 
 @Serializable
 data class Item(
     @BsonId
-    val id: Int,
+    var id: String = ObjectId().toString(),
     val country: Country,
     val shop: List<Shop>,
     val category: Category,

@@ -12,4 +12,8 @@ class CountryDataSourceImpl(
     override suspend fun getAllCountries(): List<Country> {
         return countries.find().toList()
     }
+
+    override suspend fun addCountry(country: Country) {
+        countries.insertOne(country).wasAcknowledged()
+    }
 }
