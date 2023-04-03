@@ -15,7 +15,8 @@ fun Route.getAllCountries(countryDataSource: CountryDataSource) {
             val countries = countryDataSource.getAllCountries()
             call.respond(
                 HttpStatusCode.OK,
-                SimpleResponse(true, "Countries successfully retrieved", countries)
+                countries
+                //SimpleResponse(true, "Countries successfully retrieved", countries)
             )
         }
     }

@@ -16,4 +16,8 @@ class CategoryDataSourceImpl(
         val country = countries.findOne(countryName)
         return categories.find(Category::country eq country).toList()
     }
+
+    override suspend fun addCategory(category: Category) {
+        categories.insertOne(category).wasAcknowledged()
+    }
 }
