@@ -12,7 +12,7 @@ plugins {
     id("org.jetbrains.kotlin.plugin.serialization") version "1.8.0"
 }
 
-group = "com.plcoding"
+group = "com.vegangoods"
 version = "0.0.1"
 application {
     mainClass.set("io.ktor.server.netty.EngineMain")
@@ -38,10 +38,8 @@ dependencies {
 
     //serialization
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
-    //implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktor_version")
     implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
     implementation("io.ktor:ktor-server-content-negotiation:$ktor_version")
-    //implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktor_version")
     implementation ("io.ktor:ktor-client-jackson:$ktor_version")
 
     // KMongo
