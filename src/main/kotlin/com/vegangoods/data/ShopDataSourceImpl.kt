@@ -13,7 +13,7 @@ class ShopDataSourceImpl(
     private val countries = db.getCollection<Country>()
 
     override suspend fun getShopsByCountry(countryName: String): List<Shop> {
-        val country = countries.findOne(countryName)
+        val country = countries.findOne(Country::name eq countryName)
         return shops.find(Shop::country eq country).toList()
     }
 }

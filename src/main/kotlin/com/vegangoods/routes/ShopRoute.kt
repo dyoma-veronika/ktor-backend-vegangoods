@@ -7,11 +7,12 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 fun Route.getShopsByCountry(shopDataSource: ShopDataSource) {
-    get("/shops/{country}") {
-        val countryName = call.request.queryParameters["country"].toString() //check all nullable situations. exceptions
+    get("/get-shops/{country}") {
+        val countryName = call.parameters["country"] ?: ""
+        val shops = shopDataSource.getShopsByCountry(countryName)
         call.respond(
             HttpStatusCode.OK,
-            shopDataSource.getShopsByCountry(countryName)
+            shops
         )
     }
 }
