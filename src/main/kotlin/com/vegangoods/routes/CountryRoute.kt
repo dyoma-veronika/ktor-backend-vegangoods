@@ -1,7 +1,6 @@
 package com.vegangoods.routes
 
 import com.vegangoods.data.CountryDataSource
-import com.vegangoods.data.SimpleResponse
 import com.vegangoods.data.model.Country
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -16,7 +15,6 @@ fun Route.getAllCountries(countryDataSource: CountryDataSource) {
             call.respond(
                 HttpStatusCode.OK,
                 countries
-                //SimpleResponse(true, "Countries successfully retrieved", countries)
             )
         }
     }
@@ -34,7 +32,8 @@ fun Route.addCountry(countryDataSource: CountryDataSource) {
             countryDataSource.addCountry(request)
             call.respond(
                 HttpStatusCode.OK,
-                SimpleResponse(true, "Country successfully created", Unit))
+                "Country successfully added"
+            )
         }
     }
 }

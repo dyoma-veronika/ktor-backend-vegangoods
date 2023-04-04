@@ -3,6 +3,7 @@ val kotlin_version: String by project
 val logback_version: String by project
 val kmongo_version: String by project
 val koin_version: String by project
+val commons_codec_version: String by project
 
 plugins {
     application
@@ -25,23 +26,29 @@ repositories {
 }
 
 dependencies {
-    implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
-    implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktor_version")
-    implementation("io.ktor:ktor-serialization-gson-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-cors:$ktor_version")
     implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
-    implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-call-logging-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-netty:$ktor_version")
     implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+    implementation("commons-codec:commons-codec:$commons_codec_version")
+
+    //serialization
+    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
+    //implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktor_version")
+    implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
+    implementation("io.ktor:ktor-server-content-negotiation:$ktor_version")
+    //implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktor_version")
+    implementation ("io.ktor:ktor-client-jackson:$ktor_version")
 
     // KMongo
     implementation("org.litote.kmongo:kmongo:$kmongo_version")
     implementation("org.litote.kmongo:kmongo-coroutine:$kmongo_version")
+    implementation("org.litote.kmongo:kmongo-id-serialization:4.1.3")
+    implementation ("org.mongodb:bson:3.4.3")
 
     // Koin core features
     implementation("io.insert-koin:koin-ktor:3.4.0")

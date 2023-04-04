@@ -1,10 +1,7 @@
 package com.vegangoods.routes
 
 import com.vegangoods.data.CategoryDataSource
-import com.vegangoods.data.CategoryRequest
-import com.vegangoods.data.SimpleResponse
 import com.vegangoods.data.model.Category
-import com.vegangoods.data.model.Country
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
@@ -14,18 +11,12 @@ import io.ktor.server.routing.*
 
 fun Route.getCategoriesByCountry(categoryDataSource: CategoryDataSource) {
     route("/get-categories") {
-        get {
-            val countryName = call.receive<CategoryRequest>().countryName
+        get("/{countryName}") {
+            val countryName = call.parameters["countryName"] ?: ""
             val categories = categoryDataSource.getCategoriesByCountry(countryName)
-            categories?.let {
-                call.respond(
-                    HttpStatusCode.OK,
-                    SimpleResponse(true, "successfully retrieved", it)
-                )
-            } ?: call.respond(
+            call.respond(
                 HttpStatusCode.OK,
-                SimpleResponse(true, "There is no employee with this id", Unit)
-
+                categories
             )
         }
     }
@@ -43,7 +34,7 @@ fun Route.addCategory(categoryDataSource: CategoryDataSource) {
             categoryDataSource.addCategory(request)
             call.respond(
                 HttpStatusCode.OK,
-                SimpleResponse(true, "Category successfully created", Unit)
+                "Category successfully created"
             )
         }
     }
