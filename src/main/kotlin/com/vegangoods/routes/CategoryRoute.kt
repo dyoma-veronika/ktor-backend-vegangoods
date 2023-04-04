@@ -10,32 +10,29 @@ import io.ktor.server.routing.*
 
 
 fun Route.getCategoriesByCountry(categoryDataSource: CategoryDataSource) {
-    route("/get-categories") {
-        get("/{countryName}") {
-            val countryName = call.parameters["countryName"] ?: ""
-            val categories = categoryDataSource.getCategoriesByCountry(countryName)
-            call.respond(
-                HttpStatusCode.OK,
-                categories
-            )
+    get("/get-categories/{countryName}") {
+        val countryName = call.parameters["countryName"]
+        countryName?.let {
+            val categories = categoryDataSource.getCategoriesByCountry(it)
+            if (categories.isEmpty()) {
+                call.respond("Categories not found")
+            } else call.respond(HttpStatusCode.OK, categories)
         }
     }
 }
 
 fun Route.addCategory(categoryDataSource: CategoryDataSource) {
-    route("/add-category") {
-        post {
-            val request = try {
-                call.receive<Category>()
-            } catch (e: ContentTransformationException) {
-                call.respond(HttpStatusCode.BadRequest)
-                return@post
-            }
-            categoryDataSource.addCategory(request)
-            call.respond(
-                HttpStatusCode.OK,
-                "Category successfully created"
-            )
+    post("/add-category") {
+        val request = try {
+            call.receive<Category>()
+        } catch (e: ContentTransformationException) {
+            call.respond(HttpStatusCode.BadRequest)
+            return@post
         }
+        categoryDataSource.addCategory(request)
+        call.respond(
+            HttpStatusCode.OK,
+            "Category successfully created"
+        )
     }
 }

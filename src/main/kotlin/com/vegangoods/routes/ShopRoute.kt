@@ -8,11 +8,12 @@ import io.ktor.server.routing.*
 
 fun Route.getShopsByCountry(shopDataSource: ShopDataSource) {
     get("/get-shops/{country}") {
-        val countryName = call.parameters["country"] ?: ""
-        val shops = shopDataSource.getShopsByCountry(countryName)
-        call.respond(
-            HttpStatusCode.OK,
-            shops
-        )
+        val countryName = call.parameters["country"]
+        countryName?.let {
+            val shops = shopDataSource.getShopsByCountry(it)
+            if (shops.isEmpty()) {
+                call.respond("No shops found")
+            } else call.respond(HttpStatusCode.OK, shops)
+        }
     }
 }

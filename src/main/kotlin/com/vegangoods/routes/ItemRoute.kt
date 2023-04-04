@@ -8,13 +8,19 @@ import io.ktor.server.routing.*
 
 fun Route.getItemsBySubcategory(itemDataSource: ItemDataSource) {
     get("/get-items/{country}/{category}/{subcategory}") {
-        val subcategoryName = call.parameters["subcategory"] ?: ""
-        val categoryName = call.parameters["category"] ?: ""
-        val countryName = call.parameters["country"] ?: ""
-        val items = itemDataSource.getItemsBySubcategory(countryName, categoryName, subcategoryName)
-        call.respond(
-            HttpStatusCode.OK,
-            items
-        )
+        val subcategoryName = call.parameters["subcategory"]
+        val categoryName = call.parameters["category"]
+        val countryName = call.parameters["country"]
+
+        countryName?.let { countryName ->
+            categoryName?.let { categoryName ->
+                subcategoryName?.let { subcategoryName ->
+                    val items = itemDataSource.getItemsBySubcategory(countryName, categoryName, subcategoryName)
+                    if (items.isEmpty()) {
+                        call.respond("Items not found")
+                    } else call.respond(HttpStatusCode.OK, items)
+                }
+            }
+        }
     }
 }

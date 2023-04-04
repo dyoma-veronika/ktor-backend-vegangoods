@@ -9,31 +9,26 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 fun Route.getAllCountries(countryDataSource: CountryDataSource) {
-    route("/get-countries") {
-        get {
-            val countries = countryDataSource.getAllCountries()
-            call.respond(
-                HttpStatusCode.OK,
-                countries
-            )
-        }
+    get("/get-countries") {
+        val countries = countryDataSource.getAllCountries()
+        if (countries.isEmpty()) {
+            call.respond("Countries not found")
+        } else call.respond(HttpStatusCode.OK, countries)
     }
 }
 
 fun Route.addCountry(countryDataSource: CountryDataSource) {
-    route("/add-country") {
-        post {
-            val request = try {
-                call.receive<Country>()
-            } catch (e: ContentTransformationException) {
-                call.respond(HttpStatusCode.BadRequest)
-                return@post
-            }
-            countryDataSource.addCountry(request)
-            call.respond(
-                HttpStatusCode.OK,
-                "Country successfully added"
-            )
+    post("/add-country") {
+        val request = try {
+            call.receive<Country>()
+        } catch (e: ContentTransformationException) {
+            call.respond(HttpStatusCode.BadRequest)
+            return@post
         }
+        countryDataSource.addCountry(request)
+        call.respond(
+            HttpStatusCode.OK,
+            "Country successfully added"
+        )
     }
 }
