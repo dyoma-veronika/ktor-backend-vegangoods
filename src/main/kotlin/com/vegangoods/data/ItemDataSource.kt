@@ -4,7 +4,5 @@ import com.vegangoods.data.model.Item
 
 interface ItemDataSource {
 
-    suspend fun getItemsBySubcategory(subcategoryName: String): List<Item>
-
-    suspend fun getItemsByCategory(categoryName: String): List<Item>
+    suspend fun getItemsBySubcategory(countryName: String, categoryName: String, subcategoryName: String): List<Item>
 }

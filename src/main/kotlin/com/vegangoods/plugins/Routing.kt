@@ -17,7 +17,6 @@ fun Application.configureRouting() {
         getCategoriesByCountry(categoryDataSource)
         getAllCountries(countryDataSource)
         getItemsBySubcategory(itemDataSource)
-        getItemsByCategory(itemDataSource)
         getShopsByCountry(shopDataSource)
         getSubcategoriesByCategory(subcategoryDataSource)
         addCountry(countryDataSource)
