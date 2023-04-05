@@ -7,9 +7,9 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 fun Route.getSubcategoriesByCategory(subcategoryDataSource: SubcategoryDataSource) {
-    get("/get-subcategories/{country}/{category}") {
-        val countryName = call.parameters["country"]
-        val categoryName = call.parameters["category"]
+    get("/get-subcategories/{countryName}/{categoryName}") {
+        val countryName = call.parameters["countryName"]
+        val categoryName = call.parameters["categoryName"]
 
         countryName?.let { countryName ->
             categoryName?.let { categoryName ->
