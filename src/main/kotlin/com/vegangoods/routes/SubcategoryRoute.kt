@@ -21,3 +21,12 @@ fun Route.getSubcategoriesByCategory(subcategoryDataSource: SubcategoryDataSourc
         }
     }
 }
+
+fun Route.getAllSubcategories(subcategoryDataSource: SubcategoryDataSource) {
+    get("/get-all-subcategories") {
+        val subcategories = subcategoryDataSource.getAllSubcategories()
+        if (subcategories.isEmpty()) {
+            call.respond("Subcategories not found")
+        } else call.respond(HttpStatusCode.OK, subcategories)
+    }
+}

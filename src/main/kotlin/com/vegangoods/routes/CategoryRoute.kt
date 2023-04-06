@@ -8,6 +8,14 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
+fun Route.getAllCategories(categoryDataSource: CategoryDataSource) {
+    get("/get-all-categories") {
+        val categories = categoryDataSource.getAllCategories()
+        if (categories.isEmpty()) {
+            call.respond("Countries not found")
+        } else call.respond(HttpStatusCode.OK, categories)
+    }
+}
 
 fun Route.getCategoriesByCountry(categoryDataSource: CategoryDataSource) {
     get("/get-categories/{countryName}") {

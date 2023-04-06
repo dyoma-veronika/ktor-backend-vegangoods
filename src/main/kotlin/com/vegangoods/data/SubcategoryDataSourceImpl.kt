@@ -15,6 +15,10 @@ class SubcategoryDataSourceImpl(
     private val categories = db.getCollection<Category>()
     private val countries = db.getCollection<Country>()
 
+    override suspend fun getAllSubcategories(): List<Subcategory> {
+        return subcategories.find().toList()
+    }
+
     override suspend fun getSubcategoriesByCategory(countryName: String, categoryName: String): List<Subcategory> {
         val country = countries.findOne(Country::name eq countryName)
         val category = categories.findOne(and(Category::country eq country, Category::name eq categoryName))

@@ -17,3 +17,12 @@ fun Route.getShopsByCountry(shopDataSource: ShopDataSource) {
         }
     }
 }
+
+fun Route.getAllShops(shopDataSource: ShopDataSource) {
+    get("/get-all-shops") {
+        val shops = shopDataSource.getAllShops()
+        if (shops.isEmpty()) {
+            call.respond("No shops found")
+        } else call.respond(HttpStatusCode.OK, shops)
+    }
+}

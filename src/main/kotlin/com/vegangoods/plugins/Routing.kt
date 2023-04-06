@@ -14,12 +14,20 @@ fun Application.configureRouting() {
     val subcategoryDataSource by inject<SubcategoryDataSource>()
 
     routing {
-        getCategoriesByCountry(categoryDataSource)
+
         getAllCountries(countryDataSource)
+        getAllShops(shopDataSource)
+        getAllCategories(categoryDataSource)
+        getAllSubcategories(subcategoryDataSource)
+        getAllItems(itemDataSource)
+
+        getCategoriesByCountry(categoryDataSource)
         getItemsBySubcategory(itemDataSource)
         getShopsByCountry(shopDataSource)
         getSubcategoriesByCategory(subcategoryDataSource)
+
         addCountry(countryDataSource)
         addCategory(categoryDataSource)
+
     }
 }

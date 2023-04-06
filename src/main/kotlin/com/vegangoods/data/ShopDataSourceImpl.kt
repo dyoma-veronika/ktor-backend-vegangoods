@@ -12,6 +12,10 @@ class ShopDataSourceImpl(
     private val shops = db.getCollection<Shop>()
     private val countries = db.getCollection<Country>()
 
+    override suspend fun getAllShops(): List<Shop> {
+        return shops.find().toList()
+    }
+
     override suspend fun getShopsByCountry(countryName: String): List<Shop> {
         val country = countries.findOne(Country::name eq countryName)
         return shops.find(Shop::country eq country).toList()
