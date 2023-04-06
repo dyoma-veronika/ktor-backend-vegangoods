@@ -9,7 +9,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 fun Route.getAllCountries(countryDataSource: CountryDataSource) {
-    get("/get-countries") {
+    get("/get-all-countries") {
         val countries = countryDataSource.getAllCountries()
         if (countries.isEmpty()) {
             call.respond("Countries not found")
