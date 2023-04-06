@@ -24,3 +24,12 @@ fun Route.getItemsBySubcategory(itemDataSource: ItemDataSource) {
         }
     }
 }
+
+fun Route.getAllItems(itemDataSource: ItemDataSource) {
+    get("/get-all-items") {
+        val items = itemDataSource.getAllItems()
+        if (items.isEmpty()) {
+            call.respond("Items not found")
+        } else call.respond(HttpStatusCode.OK, items)
+    }
+}

@@ -28,4 +28,8 @@ class ItemDataSourceImpl(
             subcategories.findOne(and(Subcategory::category eq category, Subcategory::name eq subcategoryName))
         return items.find(Item::subcategory eq subcategory).toList()
     }
+
+    override suspend fun getAllItems(): List<Item> {
+        return items.find().toList()
+    }
 }
