@@ -10,5 +10,6 @@ data class Category(
     @BsonId
     var id: String = ObjectId().toString(),
     val name: String,
-    val country: Country
+    val country: Country,
+    val imageUrl: String
 )

@@ -9,5 +9,6 @@ import org.bson.types.ObjectId
 data class Country(
     @BsonId
     var id: String = ObjectId().toString(),
-    val name: String
+    val name: String,
+    val imageUrl: String
 )
